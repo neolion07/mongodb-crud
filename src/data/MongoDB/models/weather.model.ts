@@ -1,26 +1,28 @@
 import mongoose from 'mongoose'
 
 const weatherSchema = new mongoose.Schema({
-    date:{
-        type: Date,
-        require: [true, 'Date required.']
+	precipitationType:{
+        type: String,
+        // Rain, snow, none, etc.
+        required: [true, 'Precipitation type required.']
     },
     temperatureInCelsius:{
         type: Number,
-        require: [true, 'Temperature required.']
+        required: false,
+        default: 25
     },
     sky:{
-        type: String
+        type: String,
+        required: false
     },
-    windSpeed:{
-        type: Number
+    windSpeedInKmh:{
+        type: Number,
+        required: false,
+        default: 0
     },
     windDirection:{
-        type: Number
-    },
-    precipitationType:{
-        type: Number
-        // Rain, snow, none, etc.
+        type: String,
+        required: false
     }
 })
 

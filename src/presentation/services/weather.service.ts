@@ -14,19 +14,17 @@ interface FindAllResponse{
 }
 
 export class WeatherService{
+
     async create(createWeatherDto: CreateWeatherDto): Promise<WeatherEntity>{
-        const { date } = createWeatherDto;
         try {
-            const exist = await weatherModel.findOne({ date });
-            if (exist) throw Error(`This entry already exists!`);
+        	console.log({createWeatherDto});
+            const weather = await weatherModel.create({...createWeatherDto});
+            if (!weather) throw Error(`FATAL: Could not create document`);
 
-            const temperatureInCelsius = await weatherModel.create(createWeatherDto);
-            if (!temperatureInCelsius) throw Error(`FATAL: Could not create entry`);
-
-            await temperatureInCelsius.save();
-            return WeatherMapper.fromEntity(temperatureInCelsius);
+            await weather.save();
+            return WeatherMapper.fromEntity(weather);
         } catch (error) {
-            throw new Error(`FATAL: ${error}`);
+            throw new Error(`${error}`);
         }
     }
 
@@ -35,28 +33,28 @@ export class WeatherService{
         id: string
     ): Promise<WeatherEntity> {
         try {
-            const date = await weatherModel.findByIdAndUpdate({
-                _id: id,
-                data: {...updateWeatherDto}
-            });
-            if (!date) throw Error(`FATAL: Could not update entry`);
-
-            await date.save();
-            return WeatherMapper.fromEntity(date);
+            const weather = await weatherModel.findByIdAndUpdate(
+            	id,
+            	{...updateWeatherDto},
+            	{new: true}
+            );
+            if (!weather) throw Error(`FATAL: Could not find document to update`);
+			await weather.save();
+            return WeatherMapper.fromEntity(weather);
         } catch (error) {
-            throw new Error(`FATAL: ${error}`);
+            throw new Error(`${error}`);
         }
     }
 
     async delete(id: string): Promise<WeatherEntity>{
         try {
-            const date = await weatherModel.findOneAndDelete(
+            const weather = await weatherModel.findOneAndDelete(
                 {_id: id}
             );
-            if (!date) throw Error(`FATAL: Could not delete entry`)
-            return WeatherMapper.fromEntity(date);
+            if (!weather) throw Error(`FATAL: Could not delete document`)
+            return WeatherMapper.fromEntity(weather);
         } catch (error) {
-            throw new Error(`FATAL: ${error}`);
+            throw new Error(`${error}`);
         }
     }
 
@@ -65,10 +63,10 @@ export class WeatherService{
             const date = await weatherModel.findById(
                 {_id: id}
             );
-            if (!date) throw Error(`FATAL: Could not find entry`);
+            if (!date) throw Error(`FATAL: Could not find document`);
             return WeatherMapper.fromEntity(date);
         } catch (error) {
-            throw new Error(`FATAL: ${error}`);
+            throw new Error(`${error}`);
         }
     }
 

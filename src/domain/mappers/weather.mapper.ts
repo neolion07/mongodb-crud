@@ -4,21 +4,20 @@ static fromEntity(object:{[key:string]:any}): WeatherEntity{
 
         const {
             id,
-            date,
+            precipitationType,
             temperatureInCelsius,
             sky,
-            windSpeed,
+            windSpeedInKmh,
             windDirection
         } = object;
-        if (!date || !temperatureInCelsius)
-            throw new Error(`Missing date and temperature.`);
+        if (!precipitationType) throw Error('prec type required');
         return new WeatherEntity(
             id,
-            date,
+            precipitationType,
             temperatureInCelsius,
             sky,
-            windSpeed,
-            windDirection
+            windSpeedInKmh,
+            windDirection,
         );
     }
 }

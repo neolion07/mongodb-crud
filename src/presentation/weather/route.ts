@@ -9,7 +9,7 @@ export class WeatherRoutes{
         // /api/weather
         routes.get('/',controller.findAll);
         routes.get('/:id',controller.findOne);
-        routes.put('/',controller.update);
+        routes.put('/:id',controller.update);
         routes.delete('/:id',controller.delete);
         routes.post('/',controller.create);
 
