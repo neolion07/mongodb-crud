@@ -13,6 +13,7 @@ const weatherSchema = new mongoose.Schema({
     },
     sky:{
         type: String,
+        // clear, cloudy, etc.
         required: false
     },
     windSpeedInKmh:{

@@ -60,11 +60,11 @@ export class WeatherService{
 
     async findOne(id: string): Promise<WeatherEntity>{
         try {
-            const date = await weatherModel.findById(
+            const weather = await weatherModel.findById(
                 {_id: id}
             );
-            if (!date) throw Error(`FATAL: Could not find document`);
-            return WeatherMapper.fromEntity(date);
+            if (!weather) throw Error(`FATAL: Could not find document`);
+            return WeatherMapper.fromEntity(weather);
         } catch (error) {
             throw new Error(`${error}`);
         }
