@@ -17,7 +17,6 @@ export class WeatherService{
 
     async create(createWeatherDto: CreateWeatherDto): Promise<WeatherEntity>{
         try {
-        	console.log({createWeatherDto});
             const weather = await weatherModel.create({...createWeatherDto});
             if (!weather) throw Error(`FATAL: Could not create document`);
 

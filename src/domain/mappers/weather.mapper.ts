@@ -10,7 +10,7 @@ static fromEntity(object:{[key:string]:any}): WeatherEntity{
             windSpeedInKmh,
             windDirection
         } = object;
-        if (!precipitationType) throw Error('prec type required');
+        
         return new WeatherEntity(
             id,
             precipitationType,

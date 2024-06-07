@@ -7,7 +7,7 @@ static fromEntity(object:{[key:string]:any}): LocationEntity{
             city,
             state
         } = object;
-        if (!city) throw Error('The city is required.');
+        
         return new LocationEntity(
             id,
             city,

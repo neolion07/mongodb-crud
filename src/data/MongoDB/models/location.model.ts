@@ -7,7 +7,7 @@ const locationSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        required: [true, "The state is required."]
+        required: false
     }
 });
 

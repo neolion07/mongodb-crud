@@ -17,7 +17,6 @@ export class LocationService{
 
     async create(createLocationDto: CreateLocationDto): Promise<LocationEntity>{
         try {
-        	console.log({createLocationDto});
             const location = await locationModel.create({...createLocationDto});
             if (!location) throw Error(`FATAL: Could not create document`);
 

@@ -9,7 +9,7 @@ export class CreateLocationDto{
        		city,
             state
        } = object;
-       if (!city || !state)
+       if (!city)
        		return ['Please provide the required properties.', undefined];
        return [undefined, new CreateLocationDto(
             city,
